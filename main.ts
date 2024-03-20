@@ -16,6 +16,15 @@
  * 
  * - Setzt "playSound" auf "false", damit keine Töne gespielt werden (siehe Dauerschleife)
  */
+/**
+ * Knopf A: 
+ * 
+ *    ==Scharf schalten / Entschärfen der Alarmanlage==
+ * 
+ * - Stoppt ertönende Soundeffekte
+ * 
+ * - Deaktiviert / Aktiviert alle Alarme für die Zukunft
+ */
 input.onButtonPressed(Button.A, function () {
     alarmAusgeloest = 0
     music.stopAllSounds()
@@ -52,15 +61,6 @@ bluetooth.startUartService()
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
  */
-/**
- * Knopf A: 
- * 
- *    ==Scharf schalten / Entschärfen der Alarmanlage==
- * 
- * - Stoppt ertönende Soundeffekte
- * 
- * - Deaktiviert / Aktiviert alle Alarme für die Zukunft
- */
 basic.forever(function () {
     value = pins.analogReadPin(AnalogPin.P1)
     if (value != 0) {
@@ -77,6 +77,7 @@ basic.forever(function () {
                 # . . # #
                 # . . . #
                 `)
+            music.stopAllSounds()
         } else {
             bluetooth.uartWriteString("ja")
             serial.writeLine("ja")
