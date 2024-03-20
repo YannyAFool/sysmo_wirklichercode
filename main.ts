@@ -40,7 +40,6 @@ input.onButtonPressed(Button.B, function () {
     alarmAusgeloest = 0
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
-    playSound = false
 })
 let value = 0
 let playSound = false
