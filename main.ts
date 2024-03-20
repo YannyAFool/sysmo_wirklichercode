@@ -1,6 +1,3 @@
-bluetooth.onBluetoothConnected(function () {
-    basic.showNumber(7)
-})
 input.onButtonPressed(Button.A, function () {
     alarmAusgeloest = 0
     music.stopAllSounds()
@@ -37,6 +34,7 @@ basic.forever(function () {
     if (alarmAktiv == true) {
         if (alarmAusgeloest == 0) {
             bluetooth.uartWriteString("nein")
+            serial.writeLine("nein")
             basic.showLeds(`
                 # . . . #
                 # # . . #
@@ -46,6 +44,7 @@ basic.forever(function () {
                 `)
         } else {
             bluetooth.uartWriteString("ja")
+            serial.writeLine("ja")
             basic.showLeds(`
                 # # # # #
                 . . . . #
@@ -67,6 +66,7 @@ basic.forever(function () {
             # . . . #
             `)
         bluetooth.uartWriteString("unscharf")
+        serial.writeLine("unscharf")
     }
     basic.pause(100)
 })
