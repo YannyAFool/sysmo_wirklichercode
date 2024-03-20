@@ -98,6 +98,7 @@ basic.forever(function () {
                     # . . . #
                     . # # # .
                     `)
+                music.stopAllSounds()
             }
         }
     } else {
