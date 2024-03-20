@@ -1,7 +1,27 @@
+input.onButtonPressed(Button.A, function () {
+    alarmAusgeloest = 0
+    music.stopAllSounds()
+    if (alarmAktiv == true) {
+        alarmAktiv = false
+    } else {
+        alarmAktiv = true
+    }
+})
+input.onButtonPressed(Button.B, function () {
+    alarmAusgeloest = 0
+    music.stopAllSounds()
+    if (alarmPlaying == true) {
+        alarmPlaying = false
+        music.stopMelody(MelodyStopOptions.All)
+    }
+})
 let value = 0
-let alarmAktiv = true
-let alarmAusgeloest = 0
 let alarmPlaying = false
+let alarmAusgeloest = 0
+let alarmAktiv = false
+alarmAktiv = true
+alarmAusgeloest = 0
+alarmPlaying = false
 bluetooth.startUartService()
 /**
  * <- Sendet nur Bluetooth, wenn Alarm scharf gestellt ist
