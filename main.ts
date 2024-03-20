@@ -32,6 +32,8 @@ input.onButtonPressed(Button.AB, function () {
     music.stopMelody(MelodyStopOptions.All)
     if (playSound == true) {
         playSound = false
+    } else {
+        playSound = true
     }
 })
 input.onButtonPressed(Button.B, function () {
