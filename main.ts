@@ -1,13 +1,4 @@
 /**
- * Knopf B:
- * 
- *   == Ausschalten ertönender Alarm ==
- * 
- * - Schaltet einen ausgelösten Alarm aus
- * 
- * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
- */
-/**
  * Kopf A+B: ( = "Leiser Alarm") => Kein Ton, wenn Alarm !
  * 
  * == Schaltet nur das Ertönen eines Sounds ab ==
@@ -36,6 +27,18 @@ input.onButtonPressed(Button.A, function () {
         playSound = true
     }
 })
+serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+	
+})
+/**
+ * Knopf B:
+ * 
+ *   == Ausschalten ertönender Alarm ==
+ * 
+ * - Schaltet einen ausgelösten Alarm aus
+ * 
+ * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
+ */
 input.onButtonPressed(Button.AB, function () {
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
