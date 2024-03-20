@@ -31,8 +31,31 @@ basic.forever(function () {
     if (value != 0) {
         alarmAusgeloest = 1
     }
-    if (alarmAusgeloest == 0) {
-        bluetooth.uartWriteString("nein")
+    if (alarmAktiv == true) {
+        if (alarmAusgeloest == 0) {
+            bluetooth.uartWriteString("nein")
+            basic.showLeds(`
+                # . . . #
+                # # . . #
+                # . # . #
+                # . . # #
+                # . . . #
+                `)
+        } else {
+            bluetooth.uartWriteString("ja")
+            basic.showLeds(`
+                # # # # #
+                . . . . #
+                . . . . #
+                # . . . #
+                . # # # .
+                `)
+            if (alarmPlaying != true) {
+                music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
+                alarmPlaying = true
+            }
+        }
+    } else {
         basic.showLeds(`
             # . . . #
             . # . # .
@@ -40,21 +63,7 @@ basic.forever(function () {
             . # . # .
             # . . . #
             `)
-    } else {
-        if (alarmAktiv == true) {
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                . . # . .
-                . . . . .
-                . . # . .
-                `)
-            bluetooth.uartWriteString("ja")
-            if (alarmPlaying != true) {
-                music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
-                alarmPlaying = true
-            }
-        }
+        bluetooth.uartWriteString("unscharf")
     }
     basic.pause(100)
 })
