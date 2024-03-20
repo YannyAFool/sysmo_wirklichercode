@@ -1,3 +1,6 @@
+bluetooth.onBluetoothConnected(function () {
+    basic.showNumber(7)
+})
 input.onButtonPressed(Button.A, function () {
     alarmAusgeloest = 0
     music.stopAllSounds()
