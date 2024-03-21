@@ -1,4 +1,13 @@
 /**
+ * Knopf B:
+ * 
+ *   == Ausschalten ertönender Alarm ==
+ * 
+ * - Schaltet einen ausgelösten Alarm aus
+ * 
+ * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
+ */
+/**
  * Kopf A+B: ( = "Leiser Alarm") => Kein Ton, wenn Alarm !
  * 
  * == Schaltet nur das Ertönen eines Sounds ab ==
@@ -15,15 +24,6 @@
  * - Stoppt ertönende Soundeffekte
  * 
  * - Deaktiviert / Aktiviert alle Alarme für die Zukunft
- */
-/**
- * Knopf B:
- * 
- *   == Ausschalten ertönender Alarm ==
- * 
- * - Schaltet einen ausgelösten Alarm aus
- * 
- * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
  */
 input.onButtonPressed(Button.A, function () {
     if (alarmAktiv == true) {

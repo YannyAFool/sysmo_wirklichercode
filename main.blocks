@@ -1,7 +1,7 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="#ae)#nM541G1tb5LgY_F">alarmAktiv</variable><variable id=",P2!-s4/abJKXh]F#^U0">alarmAusgeloest</variable><variable id="A+;fMf{ucCjwwab(toBR">playSound</variable><variable id="#++}$[rCT+x}M905E{2]">value</variable><variable id="Z]eOxljc$1KekG`bHh.@">serial_input</variable></variables><comment id="true" x="479" y="496" h="122" w="449">&lt;- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)</comment><comment id="p=u[sn(5w2psbJ+PRoR8" x="462" y="2390" h="164" w="422">Knopf A: 
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="#ae)#nM541G1tb5LgY_F">alarmAktiv</variable><variable id=",P2!-s4/abJKXh]F#^U0">alarmAusgeloest</variable><variable id="A+;fMf{ucCjwwab(toBR">playSound</variable><variable id="#++}$[rCT+x}M905E{2]">value</variable><variable id="Z]eOxljc$1KekG`bHh.@">serial_input</variable></variables><comment id="true" x="471" y="499" h="122" w="449">&lt;- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)</comment><comment id="p=u[sn(5w2psbJ+PRoR8" x="462" y="2390" h="164" w="422">Knopf A: 
    ==Scharf schalten / Entschärfen der Alarmanlage==
 - Stoppt ertönende Soundeffekte
-- Deaktiviert / Aktiviert alle Alarme für die Zukunft</comment><comment id="ft)mD[H):r-(F^^;D?-r" x="367" y="2992" h="173" w="444">Knopf B:
+- Deaktiviert / Aktiviert alle Alarme für die Zukunft</comment><comment id="ft)mD[H):r-(F^^;D?-r" x="366" y="3013" h="173" w="444">Knopf B:
   == Ausschalten ertönender Alarm ==
 - Schaltet einen ausgelösten Alarm aus
 - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"</comment><comment id="TLz_vrn%kCPjMJS#?{$(" x="496" y="3307" h="166" w="489">Kopf A+B: ( = "Leiser Alarm") =&gt; Kein Ton, wenn Alarm !
