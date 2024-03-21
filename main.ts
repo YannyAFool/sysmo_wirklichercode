@@ -16,20 +16,6 @@
  * 
  * - Deaktiviert / Aktiviert alle Alarme für die Zukunft
  */
-input.onButtonPressed(Button.A, function () {
-    alarmAusgeloest = 0
-    music.stopAllSounds()
-    if (alarmAktiv == true) {
-        alarmAktiv = false
-        playSound = false
-    } else {
-        alarmAktiv = true
-        playSound = true
-    }
-})
-serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-	
-})
 /**
  * Knopf B:
  * 
@@ -39,19 +25,34 @@ serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
  * 
  * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
  */
-input.onButtonPressed(Button.AB, function () {
+input.onButtonPressed(Button.A, function () {
+    if (alarmAktiv == true) {
+        playSound = false
+        alarmAktiv = false
+    } else {
+        playSound = true
+        alarmAktiv = true
+    }
+    alarmAusgeloest = 0
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
+    basic.pause(2000)
+})
+input.onButtonPressed(Button.AB, function () {
     if (playSound == true) {
         playSound = false
     } else {
         playSound = true
     }
+    music.stopAllSounds()
+    music.stopMelody(MelodyStopOptions.All)
+    basic.pause(2000)
 })
 input.onButtonPressed(Button.B, function () {
     alarmAusgeloest = 0
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
+    basic.pause(2000)
 })
 let value = 0
 let playSound = false
@@ -92,7 +93,7 @@ basic.forever(function () {
                     # . . . #
                     . # # # .
                     `)
-                music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
+                music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
             } else {
                 basic.showLeds(`
                     # # # # #
