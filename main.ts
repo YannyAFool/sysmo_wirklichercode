@@ -60,7 +60,7 @@ let alarmAusgeloest = 0
 let alarmAktiv = false
 alarmAktiv = true
 alarmAusgeloest = 0
-playSound = false
+playSound = true
 bluetooth.startUartService()
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
