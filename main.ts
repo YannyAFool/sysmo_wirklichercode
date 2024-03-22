@@ -116,5 +116,5 @@ basic.forever(function () {
         bluetooth.uartWriteString("unscharf")
         serial.writeLine("unscharf")
     }
-    basic.pause(100)
+    basic.pause(10)
 })
