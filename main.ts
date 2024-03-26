@@ -1,13 +1,4 @@
 /**
- * Knopf B:
- * 
- *   == Ausschalten ertönender Alarm ==
- * 
- * - Schaltet einen ausgelösten Alarm aus
- * 
- * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
- */
-/**
  * (NICHT MEHR UNTERSTÜTZT !)
  * 
  * Kopf A+B: ( = "Leiser Alarm") => Kein Ton, wenn Alarm !
@@ -29,39 +20,35 @@
  */
 input.onButtonPressed(Button.A, function () {
     if (alarmAktiv == true) {
-        playSound = false
         alarmAktiv = false
     } else {
-        playSound = true
         alarmAktiv = true
     }
-    alarmAusgeloest = 0
+    alarmAusgeloest = false
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
     basic.pause(2000)
 })
+/**
+ * Knopf B:
+ * 
+ *   == Ausschalten ertönender Alarm ==
+ * 
+ * - Schaltet einen ausgelösten Alarm aus
+ * 
+ * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
+ */
 input.onButtonPressed(Button.B, function () {
-    alarmAusgeloest = 0
-    music.stopAllSounds()
-    music.stopMelody(MelodyStopOptions.All)
-    basic.pause(2000)
-})
-input.onButtonPressed(Button.AB, function () {
-    if (playSound == true) {
-        playSound = false
-    } else {
-        playSound = true
-    }
+    alarmAusgeloest = false
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
     basic.pause(2000)
 })
 let value = 0
-let playSound = false
-let alarmAusgeloest = 0
+let alarmAusgeloest = false
 let alarmAktiv = false
 alarmAktiv = true
-alarmAusgeloest = 0
+alarmAusgeloest = false
 bluetooth.startUartService()
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
@@ -69,10 +56,10 @@ bluetooth.startUartService()
 basic.forever(function () {
     value = pins.analogReadPin(AnalogPin.P1)
     if (value != 0) {
-        alarmAusgeloest = 1
+        alarmAusgeloest = true
     }
     if (alarmAktiv == true) {
-        if (alarmAusgeloest == 0) {
+        if (alarmAusgeloest == false) {
             bluetooth.uartWriteString("nein")
             serial.writeLine("nein")
             basic.showLeds(`
