@@ -8,6 +8,8 @@
  * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
  */
 /**
+ * (NICHT MEHR UNTERSTÜTZT !)
+ * 
  * Kopf A+B: ( = "Leiser Alarm") => Kein Ton, wenn Alarm !
  * 
  * == Schaltet nur das Ertönen eines Sounds ab ==
@@ -38,6 +40,12 @@ input.onButtonPressed(Button.A, function () {
     music.stopMelody(MelodyStopOptions.All)
     basic.pause(2000)
 })
+input.onButtonPressed(Button.B, function () {
+    alarmAusgeloest = 0
+    music.stopAllSounds()
+    music.stopMelody(MelodyStopOptions.All)
+    basic.pause(2000)
+})
 input.onButtonPressed(Button.AB, function () {
     if (playSound == true) {
         playSound = false
@@ -48,19 +56,12 @@ input.onButtonPressed(Button.AB, function () {
     music.stopMelody(MelodyStopOptions.All)
     basic.pause(2000)
 })
-input.onButtonPressed(Button.B, function () {
-    alarmAusgeloest = 0
-    music.stopAllSounds()
-    music.stopMelody(MelodyStopOptions.All)
-    basic.pause(2000)
-})
 let value = 0
 let playSound = false
 let alarmAusgeloest = 0
 let alarmAktiv = false
 alarmAktiv = true
 alarmAusgeloest = 0
-playSound = true
 bluetooth.startUartService()
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
@@ -85,25 +86,14 @@ basic.forever(function () {
         } else {
             bluetooth.uartWriteString("ja")
             serial.writeLine("ja")
-            if (playSound == true) {
-                basic.showLeds(`
-                    # # # # #
-                    . . . . #
-                    . . . . #
-                    # . . . #
-                    . # # # .
-                    `)
-                music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
-            } else {
-                basic.showLeds(`
-                    # # # # #
-                    . . . . #
-                    . . # . #
-                    # . . . #
-                    . # # # .
-                    `)
-                music.stopAllSounds()
-            }
+            basic.showLeds(`
+                # # # # #
+                . . . . #
+                . . . . #
+                # . . . #
+                . # # # .
+                `)
+            music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
         }
     } else {
         basic.showLeds(`
