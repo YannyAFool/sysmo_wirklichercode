@@ -1,15 +1,4 @@
 /**
- * (NICHT MEHR UNTERSTÜTZT !)
- * 
- * Kopf A+B: ( = "Leiser Alarm") => Kein Ton, wenn Alarm !
- * 
- * == Schaltet nur das Ertönen eines Sounds ab ==
- * 
- * - anhalten aller Soundeffekte
- * 
- * - Setzt "playSound" auf "false", damit keine Töne gespielt werden (siehe Dauerschleife)
- */
-/**
  * Knopf A: 
  * 
  *    ==Scharf schalten / Entschärfen der Alarmanlage==
@@ -18,17 +7,6 @@
  * 
  * - Deaktiviert / Aktiviert alle Alarme für die Zukunft
  */
-input.onButtonPressed(Button.A, function () {
-    if (alarmAktiv == true) {
-        alarmAktiv = false
-    } else {
-        alarmAktiv = true
-    }
-    alarmAusgeloest = false
-    music.stopAllSounds()
-    music.stopMelody(MelodyStopOptions.All)
-    basic.pause(2000)
-})
 /**
  * Knopf B:
  * 
@@ -38,23 +16,51 @@ input.onButtonPressed(Button.A, function () {
  * 
  * - Schaltet dabei alle Töne ab und setzt den Alarmstatus auf "Sleeping"
  */
+function Pausiere (Zeit: number) {
+    images.createBigImage(`
+        . . # . # . # . # .
+        . # . # . # . # . #
+        # . # . # . # . # .
+        . # . # . # . # . #
+        . . # . # . # . # .
+        `).scrollImage(1, 500)
+    basic.pause(Zeit)
+    safePause = false
+}
+input.onButtonPressed(Button.A, function () {
+    if (alarmAktiv == true) {
+        alarmAktiv = false
+    } else {
+        alarmAktiv = true
+    }
+    alarmAusgeloest = false
+    music.stopAllSounds()
+    music.stopMelody(MelodyStopOptions.All)
+    safePause = true
+})
 input.onButtonPressed(Button.B, function () {
     alarmAusgeloest = false
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
-    basic.pause(2000)
+    safePause = true
 })
 let value = 0
+let safePause = false
 let alarmAusgeloest = false
 let alarmAktiv = false
-alarmAktiv = true
+alarmAktiv = false
 alarmAusgeloest = false
 bluetooth.startUartService()
+Pausiere(5000)
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
  */
 basic.forever(function () {
+    if (safePause == true) {
+        Pausiere(5000)
+    }
     value = pins.analogReadPin(AnalogPin.P1)
+    serial.writeLine("" + (value))
     if (value != 0) {
         alarmAusgeloest = true
     }
@@ -83,6 +89,7 @@ basic.forever(function () {
             music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.LoopingInBackground)
         }
     } else {
+        music.stopAllSounds()
         basic.showLeds(`
             # . . . #
             . # . # .
@@ -93,5 +100,7 @@ basic.forever(function () {
         bluetooth.uartWriteString("unscharf")
         serial.writeLine("unscharf")
     }
-    basic.pause(10)
+})
+control.inBackground(function () {
+	
 })
