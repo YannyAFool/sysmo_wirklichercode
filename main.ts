@@ -36,12 +36,28 @@ input.onButtonPressed(Button.A, function () {
     alarmAusgeloest = false
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
+    basic.showLeds(`
+        . # # # .
+        # . . . .
+        # . . . .
+        # . . . .
+        . # # # .
+        `)
+    basic.pause(500)
     safePause = true
 })
 input.onButtonPressed(Button.B, function () {
     alarmAusgeloest = false
     music.stopAllSounds()
     music.stopMelody(MelodyStopOptions.All)
+    basic.showLeds(`
+        # # # # .
+        # . . # .
+        # # # # .
+        # . # . .
+        # . . # .
+        `)
+    basic.pause(500)
     safePause = true
 })
 let value = 0
@@ -51,13 +67,13 @@ let alarmAktiv = false
 alarmAktiv = false
 alarmAusgeloest = false
 bluetooth.startUartService()
-Pausiere(5000)
+Pausiere(3000)
 /**
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
  */
 basic.forever(function () {
     if (safePause == true) {
-        Pausiere(5000)
+        Pausiere(3000)
     }
     value = pins.analogReadPin(AnalogPin.P1)
     serial.writeLine("" + (value))
