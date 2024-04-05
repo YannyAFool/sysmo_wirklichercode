@@ -72,12 +72,9 @@ Pausiere(3000)
  * <- Sendet nur dann das Alarmsignal, wenn Alarm scharf gestellt ist (alarmAktiv)
  */
 basic.forever(function () {
-    if (safePause == true) {
-        Pausiere(3000)
-    }
     value = pins.analogReadPin(AnalogPin.P1)
     serial.writeLine("" + (value))
-    if (value != 0) {
+    if (value >= 1000) {
         alarmAusgeloest = true
     }
     if (alarmAktiv == true) {
@@ -116,7 +113,4 @@ basic.forever(function () {
         bluetooth.uartWriteString("unscharf")
         serial.writeLine("unscharf")
     }
-})
-control.inBackground(function () {
-	
 })
